@@ -80,27 +80,6 @@
       margin-left:8px;
     }
 
-    /* Play-Overlay wenn Browser Autoplay blockt */
-    .overlay {
-      position:fixed;
-      inset:0;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      pointer-events:none;
-    }
-    .playbtn {
-      pointer-events:auto;
-      background:linear-gradient(90deg,var(--accent),#06b6d4);
-      border:none;
-      color:white;
-      padding:18px 28px;
-      border-radius:999px;
-      font-size:18px;
-      box-shadow:0 8px 30px rgba(139,92,246,0.18);
-      cursor:pointer;
-    }
-
     /* Mobile tweaks */
     @media (max-width:680px){
       .card {
@@ -127,30 +106,21 @@
       <h1>Fin</h1>
       <div class="meta big">Minecraft: Competence<br>Sword: LT5</div>
       <div class="tags">
-        <div class="tag">Deutschland ❤️</div>
-        <div class="tag">Österreich ❤️</div>
-        <div class="tag">Türkei ❤️</div>
+        <div class="tag">Content Creator❤️</div>
+        <div class="tag">Österreich und Deutschland ❤️</div>
+        <div class="tag">Minecraft ❤️</div>
       </div>
       <p style="margin-top:18px;opacity:0.9">Willkommen auf der Seite von Fin</p>
     </div>
   </div>
 
-  <!-- Audio: lege lied2.mp3 (einmal) und lied1.mp3 (Loop) im selben Ordner ab -->
-  <audio id="bgAudio" loop preload="auto" playsinline></audio>
-
-  <!-- Overlay Play-Button -->
-  <div class="overlay" id="overlay" style="display:none">
-    <button class="playbtn" id="playBtn" aria-label="Musik abspielen">▶ Musik abspielen</button>
-  </div>
+  <!-- Audio -->
+  <audio id="bgAudio" preload="auto" playsinline></audio>
 
   <script>
     const audio = document.getElementById('bgAudio');
-    const overlay = document.getElementById('overlay');
-    const playBtn = document.getElementById('playBtn');
-
-    // Lieder vorbereiten: lied2 einmal, dann lied1 wiederholt
-    const lied2 = 'lied2.mp3';
-    const lied1 = 'lied1.mp3';
+    const lied2 = 'lied2.mp3'; // einmal abspielen
+    const lied1 = 'lied1.mp3'; // danach Loop
     let stage = 0; // 0 = lied2, 1 = lied1
 
     function playNext() {
@@ -160,11 +130,10 @@
         stage = 1;
       } else {
         audio.src = lied1;
-        audio.loop = true; // Dauerloop
+        audio.loop = true;
       }
       audio.play().catch(err=>{
-        overlay.style.display = 'flex';
-        console.log('Autoplay blockiert:', err && err.message ? err.message : err);
+        console.log('Autoplay blockiert:', err);
       });
     }
 
@@ -172,21 +141,9 @@
       playNext();
     });
 
-    // Versuche direkt beim Laden abzuspielen
     window.addEventListener('load', ()=>{
       audio.volume = 0.9;
       playNext();
-    });
-
-    // Play-Button falls Autoplay blockiert
-    playBtn.addEventListener('click', ()=>{
-      playNext();
-      overlay.style.display = 'none';
-    });
-
-    document.addEventListener('click', function firstInteraction(){
-      playNext();
-      document.removeEventListener('click', firstInteraction);
     });
   </script>
 </body>
