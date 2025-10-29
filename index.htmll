@@ -79,8 +79,6 @@
     .heart {
       margin-left:8px;
     }
-
-    /* Mobile tweaks */
     @media (max-width:680px){
       .card {
         flex-direction:column;
@@ -106,45 +104,21 @@
       <h1>Fin</h1>
       <div class="meta big">Minecraft: Competence<br>Sword: LT5</div>
       <div class="tags">
-        <div class="tag">Content Creator❤️</div>
-        <div class="tag">Österreich und Deutschland ❤️</div>
+        <div class="tag">Content Creator ❤️</div>
+        <div class="tag">Österreich & Deutschland ❤️</div>
         <div class="tag">Minecraft ❤️</div>
       </div>
       <p style="margin-top:18px;opacity:0.9">Willkommen auf der Seite von Fin</p>
     </div>
   </div>
 
-  <!-- Audio -->
-  <audio id="bgAudio" preload="auto" playsinline></audio>
+  <!-- Audio automatisch und in Dauerschleife -->
+  <audio id="bgAudio" src="lied2.mp3" preload="auto" loop playsinline></audio>
 
   <script>
     const audio = document.getElementById('bgAudio');
-    const lied2 = 'lied2.mp3'; // einmal abspielen
-    const lied1 = 'lied1.mp3'; // danach Loop
-    let stage = 0; // 0 = lied2, 1 = lied1
-
-    function playNext() {
-      if(stage === 0){
-        audio.src = lied2;
-        audio.loop = false;
-        stage = 1;
-      } else {
-        audio.src = lied1;
-        audio.loop = true;
-      }
-      audio.play().catch(err=>{
-        console.log('Autoplay blockiert:', err);
-      });
-    }
-
-    audio.addEventListener('ended', ()=>{
-      playNext();
-    });
-
-    window.addEventListener('load', ()=>{
-      audio.volume = 0.9;
-      playNext();
-    });
+    audio.volume = 0.9;
+    audio.play().catch(err => console.log('Autoplay blockiert:', err));
   </script>
 </body>
 </html>
