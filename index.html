@@ -5,36 +5,122 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>FürFin</title>
   <style>
-    :root{--bg:#0f1724;--card:#0b1220;--accent:#8b5cf6;--text:#e6eef8}
-    html,body{height:100%;margin:0;font-family:Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial}
-    body{background:linear-gradient(180deg,#071027 0%, #07121a 60%);color:var(--text);display:flex;align-items:center;justify-content:center}
-    .card{width:min(920px,94vw);background:linear-gradient(180deg,rgba(255,255,255,0.02),transparent);border-radius:18px;padding:32px;box-shadow:0 10px 30px rgba(2,6,23,0.6);display:flex;gap:28px;align-items:center}
-    .avatar{width:240px;height:240px;flex:0 0 240px;border-radius:16px;overflow:hidden;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#061028,#0b1630);border:2px solid rgba(255,255,255,0.03)}
-    .avatar img{width:100%;height:100%;object-fit:cover;display:block}
-    .content{flex:1}
-    h1{margin:0;font-size:28px;letter-spacing:0.6px}
-    .meta{margin-top:8px;color:rgba(230,238,248,0.9)}
-    .tags{margin-top:18px;display:flex;flex-wrap:wrap;gap:12px}
-    .tag{background:rgba(255,255,255,0.03);padding:10px 14px;border-radius:999px;font-weight:600}
-    .big{font-size:20px}
-    .heart{margin-left:8px}
+    :root {
+      --bg:#0f1724;
+      --card:#0b1220;
+      --accent:#8b5cf6;
+      --text:#e6eef8;
+    }
+    html,body {
+      height:100%;
+      margin:0;
+      font-family:Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+      background:linear-gradient(180deg,#071027 0%, #07121a 60%);
+      color:var(--text);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+    }
+    .card {
+      width:min(920px,94vw);
+      background:linear-gradient(180deg,rgba(255,255,255,0.02),transparent);
+      border-radius:18px;
+      padding:32px;
+      box-shadow:0 10px 30px rgba(2,6,23,0.6);
+      display:flex;
+      gap:28px;
+      align-items:center;
+    }
+    .avatar {
+      width:240px;
+      height:240px;
+      flex:0 0 240px;
+      border-radius:16px;
+      overflow:hidden;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      background:linear-gradient(135deg,#061028,#0b1630);
+      border:2px solid rgba(255,255,255,0.03);
+    }
+    .avatar img {
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      display:block;
+    }
+    .content {
+      flex:1;
+    }
+    h1 {
+      margin:0;
+      font-size:28px;
+      letter-spacing:0.6px;
+    }
+    .meta {
+      margin-top:8px;
+      color:rgba(230,238,248,0.9);
+    }
+    .tags {
+      margin-top:18px;
+      display:flex;
+      flex-wrap:wrap;
+      gap:12px;
+    }
+    .tag {
+      background:rgba(255,255,255,0.03);
+      padding:10px 14px;
+      border-radius:999px;
+      font-weight:600;
+    }
+    .big {
+      font-size:20px;
+    }
+    .heart {
+      margin-left:8px;
+    }
 
     /* Play-Overlay wenn Browser Autoplay blockt */
-    .overlay{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;pointer-events:none}
-    .playbtn{pointer-events:auto;background:linear-gradient(90deg,var(--accent),#06b6d4);border:none;color:white;padding:18px 28px;border-radius:999px;font-size:18px;box-shadow:0 8px 30px rgba(139,92,246,0.18);cursor:pointer}
+    .overlay {
+      position:fixed;
+      inset:0;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      pointer-events:none;
+    }
+    .playbtn {
+      pointer-events:auto;
+      background:linear-gradient(90deg,var(--accent),#06b6d4);
+      border:none;
+      color:white;
+      padding:18px 28px;
+      border-radius:999px;
+      font-size:18px;
+      box-shadow:0 8px 30px rgba(139,92,246,0.18);
+      cursor:pointer;
+    }
 
     /* Mobile tweaks */
     @media (max-width:680px){
-      .card{flex-direction:column;align-items:center;padding:20px}
-      .avatar{width:180px;height:180px}
-      .content{text-align:center}
+      .card {
+        flex-direction:column;
+        align-items:center;
+        padding:20px;
+      }
+      .avatar {
+        width:180px;
+        height:180px;
+      }
+      .content {
+        text-align:center;
+      }
     }
   </style>
 </head>
 <body>
   <div class="card" role="main">
     <div class="avatar" aria-hidden="true">
-      <!-- ersetze bild1.png durch das Profilbild im gleichen Ordner -->
       <img src="bild1.png" alt="Profilbild" id="profileImg">
     </div>
     <div class="content">
@@ -49,56 +135,58 @@
     </div>
   </div>
 
-  <!-- Audio: lege lied1.mp3 in den gleichen Ordner wie diese HTML-Datei -->
-  <audio id="bgAudio" src="lied1.mp3" loop preload="auto" playsinline></audio>
+  <!-- Audio: lege lied2.mp3 (einmal) und lied1.mp3 (Loop) im selben Ordner ab -->
+  <audio id="bgAudio" loop preload="auto" playsinline></audio>
 
-  <!-- Overlay Play-Button (wird nur sichtbar, wenn Autoplay blockiert) -->
+  <!-- Overlay Play-Button -->
   <div class="overlay" id="overlay" style="display:none">
     <button class="playbtn" id="playBtn" aria-label="Musik abspielen">▶ Musik abspielen</button>
   </div>
 
   <script>
-    // Versuche automatisch abzuspielen. Viele Browser blocken Autoplay mit Ton.
     const audio = document.getElementById('bgAudio');
     const overlay = document.getElementById('overlay');
     const playBtn = document.getElementById('playBtn');
 
-    function tryPlay(){
-      const p = audio.play();
-      if(p !== undefined){
-        p.then(()=>{
-          // Autoplay funktionierte
-          overlay.style.display = 'none';
-        }).catch((err)=>{
-          // Autoplay blockiert — zeige Button
-          overlay.style.display = 'flex';
-          console.log('Autoplay blockiert:', err && err.message ? err.message : err);
-        });
+    // Lieder vorbereiten: lied2 einmal, dann lied1 wiederholt
+    const lied2 = 'lied2.mp3';
+    const lied1 = 'lied1.mp3';
+    let stage = 0; // 0 = lied2, 1 = lied1
+
+    function playNext() {
+      if(stage === 0){
+        audio.src = lied2;
+        audio.loop = false;
+        stage = 1;
+      } else {
+        audio.src = lied1;
+        audio.loop = true; // Dauerloop
       }
+      audio.play().catch(err=>{
+        overlay.style.display = 'flex';
+        console.log('Autoplay blockiert:', err && err.message ? err.message : err);
+      });
     }
 
-    // Beim Laden versuchen zu spielen
+    audio.addEventListener('ended', ()=>{
+      playNext();
+    });
+
+    // Versuche direkt beim Laden abzuspielen
     window.addEventListener('load', ()=>{
-      // Lade kurz, dann play versuchen
-      audio.volume = 0.9; // Standardlautstärke
-      tryPlay();
+      audio.volume = 0.9;
+      playNext();
     });
 
-    // Wenn Nutzer den Button klickt, dann spielen
+    // Play-Button falls Autoplay blockiert
     playBtn.addEventListener('click', ()=>{
-      audio.play().then(()=>{
-        overlay.style.display = 'none';
-      }).catch(()=>{
-        // Falls trotzdem Fehler, mute kurz und dann versuchen
-        audio.muted = false;
-        overlay.style.display = 'none';
-      });
+      playNext();
+      overlay.style.display = 'none';
     });
 
-    // Optional: Wenn der Nutzer irgendwo klickt, noch mal versuchen (hilft manchmal auf Mobilgeräten)
-    document.addEventListener('click', function firstUserInteraction(){
-      tryPlay();
-      document.removeEventListener('click', firstUserInteraction);
+    document.addEventListener('click', function firstInteraction(){
+      playNext();
+      document.removeEventListener('click', firstInteraction);
     });
   </script>
 </body>
